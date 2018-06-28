@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
+  sensor_msgs
   message_generation
 )
 
@@ -62,6 +63,12 @@ catkin_package(
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+)
+
+add_executable(finger_joints_pub src/finger_joints_pub.cpp)
+
+target_link_libraries(finger_joints_pub
+   ${catkin_LIBRARIES}
 )
 
 #############

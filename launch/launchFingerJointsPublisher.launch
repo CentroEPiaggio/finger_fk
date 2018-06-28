@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!-- 
+LAUNCH FILE TO PUBLISH ALL THE SOFTHAND JOINT STATES FROM THE SINGLE SYNERGY JOINT FROM THE ROBOT
+-->
+
+<launch>
+
+	<!-- Calling the finger_joints_pub node -->
+	<node name="finger_joints_pub" pkg="finger_fk" type="finger_joints_pub" respawn="true" args="input_topic:=/right_hand/joint_states output_topic:=/all_hand_joint_states" output="screen">
+	</node> 
+
+</launch>

@@ -29,7 +29,7 @@
 #define HAND_PREFIX		"right_hand_"							// Prefix of the Soft_Hand
 
 // OTHER CONSTANT
-#define SCALE			1										// Scale for computing the joints of the fingers
+#define SCALE			0.75									// Scale for computing the joints of the fingers
 
 #define abd_lb  		(-30.0)
 #define abd_ub   		30.0
@@ -66,107 +66,107 @@ void publish_fing_joint_states(const sensor_msgs::JointState::ConstPtr& input_jo
 
 	// THUMB
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "thumb_abd_joint");									// thumb_abd_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (abd_lb + 1.3 * whole_joint_msg.position[0] *(abd_ub - abd_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.3 * whole_joint_msg.position[0] *(thumb_abd_ub - thumb_abd_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "thumb_inner_joint");									// thumb_inner_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.3 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.3 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "thumb_inner_joint_mimic");								// thumb_inner_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.3 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.3 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "thumb_outer_joint");									// thumb_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "thumb_outer_joint_mimic");								// thumb_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	// INDEX
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_abd_joint");										// index_abd_joint
 	whole_joint_msg.position.push_back(float (SCALE) * 0.2 * whole_joint_msg.position[0]);
  
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_inner_joint");									// index_inner_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_inner_joint_mimic");							// index_inner_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_middle_joint");									// index_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_middle_joint_mimic");							// index_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_outer_joint");									// index_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_outer_joint_mimic");								// index_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	// MIDDLE
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_abd_joint");									// middle_abd_joint
 	whole_joint_msg.position.push_back(float (SCALE) * 0.0 * whole_joint_msg.position[0]);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_inner_joint");									// middle_inner_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_inner_joint_mimic");							// middle_inner_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_middle_joint");									// middle_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_middle_joint_mimic");							// middle_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_outer_joint");									// middle_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "middle_outer_joint_mimic");							// middle_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	// RING
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_abd_joint");										// ring_abd_joint
 	whole_joint_msg.position.push_back(float (SCALE) * 0.2 * whole_joint_msg.position[0]);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_inner_joint");									// ring_inner_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_inner_joint_mimic");								// ring_inner_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_middle_joint");									// ring_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_middle_joint_mimic");								// ring_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_outer_joint");									// ring_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "ring_outer_joint_mimic");								// ring_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	// LITTLE
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_abd_joint");									// little_abd_joint
 	whole_joint_msg.position.push_back(float (SCALE) * 0.4 * whole_joint_msg.position[0]);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_inner_joint");									// little_inner_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_inner_joint_mimic");							// little_inner_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (inner_lb + 1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_middle_joint");									// little_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_middle_joint_mimic");							// little_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (middle_lb + 1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(middle_ub - middle_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_outer_joint");									// little_outer_joint
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "little_outer_joint_mimic");							// little_outer_joint_mimic
-	whole_joint_msg.position.push_back(float (SCALE) * (outer_lb + 1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
+	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	pub_fing_joint_states.publish(whole_joint_msg);
 	

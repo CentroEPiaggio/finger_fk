@@ -1,9 +1,9 @@
 /**
-    main.cpp
+    finger_joints_pub.cpp
 
     Purpose: a ROS node to publish the joints of the PISA/IIT SoftHand from the synergy_joint read from the robot
 
-    Input Topic: 	/soft_hand/joint_states
+    Input Topic: 		/soft_hand/joint_states
     Output Topic: 	/all_hand_joint_states
 
     @authors Pollayil George Jose, Pollayil Mathew Jose
@@ -25,11 +25,11 @@
 // OTHER INCLUDES
 #include <cmath>
 
-#define DEBUG			1										// if DEBUG 1 prints additional couts
+#define DEBUG			1															// if DEBUG 1 prints additional couts
 #define HAND_PREFIX		"right_hand_"							// Prefix of the Soft_Hand
 
 // OTHER CONSTANT
-#define SCALE			0.75									// Scale for computing the joints of the fingers
+#define SCALE			0.75													// Scale for computing the joints of the fingers
 
 #define abd_lb  		(-30.0)
 #define abd_ub   		30.0
@@ -61,7 +61,7 @@ void publish_fing_joint_states(const sensor_msgs::JointState::ConstPtr& input_jo
 
 	// Filling up the whole joint state msg
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "synergy_joint");									// synergy_joint
-	whole_joint_msg.position.push_back(syn_msg.position[find (syn_msg.name.begin(),syn_msg.name.end(), 
+	whole_joint_msg.position.push_back(syn_msg.position[find (syn_msg.name.begin(),syn_msg.name.end(),
 			string(HAND_PREFIX) + "synergy_joint") - syn_msg.name.begin()]);
 
 	// THUMB
@@ -83,7 +83,7 @@ void publish_fing_joint_states(const sensor_msgs::JointState::ConstPtr& input_jo
 	// INDEX
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_abd_joint");										// index_abd_joint
 	whole_joint_msg.position.push_back(float (SCALE) * 0.2 * whole_joint_msg.position[0]);
- 
+
 	whole_joint_msg.name.push_back(string(HAND_PREFIX) + "index_inner_joint");									// index_inner_joint
 	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(inner_ub - inner_lb))*pi/180);
 
@@ -169,7 +169,7 @@ void publish_fing_joint_states(const sensor_msgs::JointState::ConstPtr& input_jo
 	whole_joint_msg.position.push_back(float (SCALE) * (1.0 * whole_joint_msg.position[0] *(outer_ub - outer_lb))*pi/180);
 
 	pub_fing_joint_states.publish(whole_joint_msg);
-	
+
 }
 
 // MAIN

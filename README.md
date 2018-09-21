@@ -17,7 +17,7 @@ geometry_msgs/Pose ee_frame_in_finger
 
 ### Prerequisites
 
-This package depends on ROS Indigo or newer and the HRL-KDL package. 
+This package depends on ROS Indigo or newer and the HRL-KDL package.
 
 Clone this in you catkin workspace and build:
 https://github.com/gt-ros-pkg/hrl-kdl.git
@@ -42,3 +42,17 @@ Or add the following to your launch file:
 <!-- Load finger_fk service node -->
 <node name="finger_forward_kinematics" pkg="finger_fk" type="finger_fk_main.py" output="screen"/>
 ```
+
+## Running the finger fk server
+
+This one is needed to publish the soft hands all finger joints to a topic using only the hand_synergy_joint read from a topic.
+
+```
+roslaunch finger_fk launchFingerJointsPublisher.launch
+```
+
+Please check inside the launch file if the topics are correctly set.
+
+## Running the finger joints server
+
+This one is needed to get the jointstate of any finger of the softhand from a starting to an end link.

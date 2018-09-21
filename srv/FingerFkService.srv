@@ -2,4 +2,4 @@ string ee_link_name
 string finger_link_name
 float64[] joint_state_positions
 ---
-sensor_msgs/JointState joint_state
+geometry_msgs/Pose ee_frame_in_finger

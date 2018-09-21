@@ -24,13 +24,15 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   FingerFkService.srv
+	FingerJointsService.srv
 )
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs 
+  std_msgs
   geometry_msgs
+	sensor_msgs
 )
 
 ################################################
@@ -78,4 +80,3 @@ target_link_libraries(finger_joints_pub
 #############
 ## Testing ##
 #############
-

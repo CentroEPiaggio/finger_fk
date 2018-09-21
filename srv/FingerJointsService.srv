@@ -1,0 +1,4 @@
+string root_link_name
+string tip_link_name
+---
+geometry_msgs/Pose ee_frame_in_finger

@@ -20,61 +20,122 @@
 // MSG INCLUDES
 #include <sensor_msgs/JointState.h>
 
+// SERVICE INCLUDES
+#include "finger_fk/FingerJointsService.h"
+
 // OTHER INCLUDES
 #include <cmath>
 
+#define HAND_NAME		"right_hand"
+
+using namespace std;
+
+// GLOBAL VARIABLES
+ros::NodeHandle* fjs_nh_ptr; 			// a pointer to the node handle for the callback
+
 /**********************************************************************************************
- GET FINGER JOINT STATES 
+ GET FINGER JOINT STATES
 **********************************************************************************************/
-void getFingerJointStates(float finger_positions_a[], float finger_positions_b[]) {
-	sensor_msgs::JointState::ConstPtr finger_joint_state =
-		ros::topic::waitForMessage<sensor_msgs::JointState>("/joint_states", n);
-		// ros::topic::waitForMessage<sensor_msgs::JointState>("/" + string(HAND_NAME) + "/joint_states", n);
-	if (!finger_joint_state) {
+sensor_msgs::JointState getFingerJointState(int finger_id_, bool &listen_success_){
+	// Listening the whole joint state
+	sensor_msgs::JointState::ConstPtr full_joint_state =
+		ros::topic::waitForMessage<sensor_msgs::JointState>("/joint_states", *fjs_nh_ptr);
+	if (!full_joint_state) {
 		ROS_ERROR("Finger joint states not received!!! \n");
+		listen_success_ = false;
 	}
+	listen_success_ = true;
+
+	// Creating a JointState to be filled up
+	sensor_msgs::JointState finger_joint_state;
 
 	// Saving the needed joint states of finger in collision
-	if (finger_name == "thumb") {
-		finger_positions_a[0] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_abd_joint") - finger_joint_state->name.begin()];
-		finger_positions_a[1] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_inner_joint") - finger_joint_state->name.begin()];
-		finger_positions_a[2] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_inner_joint_mimic") - finger_joint_state->name.begin()];
-		finger_positions_a[3] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_outer_joint") - finger_joint_state->name.begin()];
-		finger_positions_a[4] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_outer_joint_mimic") - finger_joint_state->name.begin()];
-	} else {
-		finger_positions_b[0] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_abd_joint") - finger_joint_state->name.begin()];
-		finger_positions_b[1] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_inner_joint") - finger_joint_state->name.begin()];
-		finger_positions_b[2] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_inner_joint_mimic") - finger_joint_state->name.begin()];
-		finger_positions_b[3] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_middle_joint") - finger_joint_state->name.begin()];
-		finger_positions_b[4] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_middle_joint_mimic") - finger_joint_state->name.begin()];
-		finger_positions_b[5] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_outer_joint") - finger_joint_state->name.begin()];
-		finger_positions_b[6] =
-		finger_joint_state->position[find (finger_joint_state->name.begin(),finger_joint_state->name.end(),
-			string(HAND_NAME) + "_" + finger_name + "_outer_joint_mimic") - finger_joint_state->name.begin()];
+	if (finger_id_ == 1) {
+
+		int index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_thumb_abd_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_thumb_inner_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_thumb_inner_joint_mimic") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_thumb_outer_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_thumb_outer_joint_mimic") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+	} else if (finger_id_ == 2) {
+
+		int index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_abd_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_inner_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_inner_joint_mimic") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_middle_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_middle_joint_mimic") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_outer_joint") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
+		index = find (full_joint_state->name.begin(),full_joint_state->name.end(),
+			string(HAND_NAME) + "_index_outer_joint_mimic") - full_joint_state->name.begin();
+		finger_joint_state.name.push_back(full_joint_state->name[index]);
+		finger_joint_state.position.push_back(full_joint_state->position[index]);
+
 	}
 }
+
+/**********************************************************************************************
+ SERVICE CALLBACK
+**********************************************************************************************/
+bool getFingerJoints(finger_fk::FingerJointsService::Request &req,
+	finger_fk::FingerJointsService::Response &res){
+		int finger_id = req.finger_id;
+		bool listen_success;
+
+		// Getting the finger joint state from palm_link
+		sensor_msgs::JointState finger_joints = getFingerJointState(finger_id, listen_success);
+
+		// Filling up the Response
+		res.joint_state = finger_joints;
+
+		// Ending the callback
+		if (listen_success) return true;
+	}
+
+
 
 /* ******************************************************************************************** */
 
@@ -84,11 +145,13 @@ int main(int argc, char** argv){
 	// Initializing ROS node
 	ros::init(argc, argv, "finger_joints_service");
 	ros::NodeHandle fjs_nh;
+	fjs_nh_ptr = &fjs_nh;
 
-
+	// The finger joint service server
+	ros::ServiceServer fj_server = fjs_nh.advertiseService("fj_service", &getFingerJoints);
 
 	// Success message
-	std::cout << "The Finger Joint Server ready to process requests!" << std::endl;
+	ROS_INFO("The Finger Joint Server ready to process requests!");
 
 	// Spin
 	ros::spin ();

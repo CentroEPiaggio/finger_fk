@@ -68,8 +68,12 @@ include_directories(
 )
 
 add_executable(finger_joints_pub src/finger_joints_pub.cpp)
+add_executable(finger_joints_service src/finger_joints_service.cpp)
 
 target_link_libraries(finger_joints_pub
+   ${catkin_LIBRARIES}
+)
+target_link_libraries(finger_joints_service
    ${catkin_LIBRARIES}
 )
 

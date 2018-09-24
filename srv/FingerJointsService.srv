@@ -1,4 +1,3 @@
-string root_link_name
-string tip_link_name
+int8 finger_id
 ---
 sensor_msgs/JointState joint_state

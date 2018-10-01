@@ -56,7 +56,7 @@ int main(int argc, char** argv){
     ROS_INFO("The result is as follows:");
     for(size_t i = 0; i < srv.response.joint_state.name.size(); i++) {
       cout << i << ", " << srv.response.joint_state.name[i] << " : " <<
-        srv.response.joint_state.position[i] << ";" << std::endl;
+        srv.response.joint_state.position[i] << ";" << endl;
     }
   } else {
     ROS_ERROR("Failed to call finger_joints_service");

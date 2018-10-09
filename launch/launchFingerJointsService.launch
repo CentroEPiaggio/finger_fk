@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<!-- 
+LAUNCH FILE FOR THE SERVICE USED TO GET ALL THE SOFTHAND FINGER JOINT STATES
+-->
+
+<launch>
+
+	<!-- Set verbosity level to debug -->
+  	<env name ="ROSCONSOLE_CONFIG_FILE" value ="$(find finger_fk)/config/rosconsole.conf"/>
+
+	<!-- Calling the finger_joints_pub node -->
+	<node name="finger_joints_serv" pkg="finger_fk" type="finger_joints_service" respawn="false" output="screen">
+	</node> 
+
+</launch>

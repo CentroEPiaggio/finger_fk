@@ -61,10 +61,6 @@
   <exec_depend>geometry_msgs</exec_depend>  
   <exec_depend>message_runtime</exec_depend>
 
-  <depend>hrl_kdl</depend>
-  <depend>hrl_geom</depend>
-  <depend>pykdl_utils</depend>
-
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

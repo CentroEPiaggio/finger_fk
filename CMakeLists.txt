@@ -14,6 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   sensor_msgs
   message_generation
+  hrl_geom
+  pykdl_utils
 )
 
 ################################################
@@ -52,7 +54,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES finger_fk
-   CATKIN_DEPENDS message_runtime std_msgs geometry_msgs
+   CATKIN_DEPENDS message_runtime std_msgs geometry_msgs hrl_geom pykdl_utils
 #  DEPENDS system_lib
 )
 

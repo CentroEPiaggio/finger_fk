@@ -1,0 +1,3 @@
+[submodule "hrl-kdl"]
+	path = hrl-kdl
+	url = https://github.com/CentroEPiaggio/hrl-kdl

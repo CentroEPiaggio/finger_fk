@@ -11,7 +11,7 @@ import numpy as np
 from urdf_parser_py.urdf import URDF
 from pykdl_utils.kdl_kinematics import KDLKinematics
 
-urdf_str = "/home/mathew/tub_ws/src/kuka-lwr/single_lwr_example/single_lwr_robot/robot/lwr_soma.urdf.xacro"
+urdf_str = "/home/mathew/franka_ws/src/adaptive_grasp_controller/robot/panda_softhand.urdf.xacro"
 
 def mat_to_pose(mat, transform = None):
     '''Convert a homogeneous matrix to a Pose message, optionally premultiply by a transform.

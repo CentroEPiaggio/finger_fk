@@ -74,6 +74,7 @@ sensor_msgs::JointState getFingerJointState(int finger_id_, bool &success_){
 		finger_joint_state.position.push_back(full_joint_state->position[index]);
 
 		ROS_DEBUG_STREAM("FINISHED TO FILL UP THUMB JOINTS!");
+		success_ = true;
 
 	} else if (finger_id_ == 2) {
 
@@ -115,6 +116,7 @@ sensor_msgs::JointState getFingerJointState(int finger_id_, bool &success_){
 		finger_joint_state.position.push_back(full_joint_state->position[index]);
 
 		ROS_DEBUG_STREAM("FINISHED TO FILL UP INDEX JOINTS!");
+		success_ = true;
 
 	} else if (finger_id_ == 3) {
 
@@ -156,6 +158,7 @@ sensor_msgs::JointState getFingerJointState(int finger_id_, bool &success_){
 		finger_joint_state.position.push_back(full_joint_state->position[index]);
 
 		ROS_DEBUG_STREAM("FINISHED TO FILL UP MIDDLE JOINTS!");
+		success_ = true;
 
 	} else if (finger_id_ == 4) {
 
@@ -197,6 +200,7 @@ sensor_msgs::JointState getFingerJointState(int finger_id_, bool &success_){
 		finger_joint_state.position.push_back(full_joint_state->position[index]);
 
 		ROS_DEBUG_STREAM("FINISHED TO FILL UP RING JOINTS!");
+		success_ = true;
 
 	} else if (finger_id_ == 5) {
 
@@ -238,12 +242,13 @@ sensor_msgs::JointState getFingerJointState(int finger_id_, bool &success_){
 		finger_joint_state.position.push_back(full_joint_state->position[index]);
 
 		ROS_DEBUG_STREAM("FINISHED TO FILL UP LITTLE JOINTS!");
+		success_ = true;
 
 	} else {
-		ROS_WARN("The Finger Joint Server ready to process requests!");
+		ROS_WARN("FingerJointService : something went wrong. The finger id is not correct!");
 		success_ = false;
 	}
-	success_ = true;
+	
 	return finger_joint_state;
 }
 

@@ -73,6 +73,10 @@ add_executable(finger_joints_pub src/finger_joints_pub.cpp)
 add_executable(finger_joints_service src/finger_joints_service.cpp)
 add_executable(test_finger_joints_service test/test_finger_joints_service.cpp)
 
+## Add cmake target dependencies of the executable
+## same as for the library above
+add_dependencies(finger_joints_service ${catkin_EXPORTED_TARGETS} finger_fk_gencpp)
+
 target_link_libraries(finger_joints_pub
    ${catkin_LIBRARIES}
 )

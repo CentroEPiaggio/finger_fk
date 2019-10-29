@@ -24,9 +24,9 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate services in the 'srv' folder
 add_service_files(
-  FILES
-  FingerFkService.srv
-	FingerJointsService.srv
+		FILES
+		FingerFkService.srv
+		FingerJointsService.srv
 )
 
 ## Generate added messages and services with any dependencies listed here
@@ -75,16 +75,17 @@ add_executable(test_finger_joints_service test/test_finger_joints_service.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(finger_joints_service ${catkin_EXPORTED_TARGETS} finger_fk_gencpp)
+add_dependencies(finger_joints_service ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(test_finger_joints_service ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 target_link_libraries(finger_joints_pub
-   ${catkin_LIBRARIES}
+   ${catkin_LIBRARIES} ${ROS_LIBRARIES}
 )
 target_link_libraries(finger_joints_service
-   ${catkin_LIBRARIES}
+   ${catkin_LIBRARIES} ${ROS_LIBRARIES}
 )
 target_link_libraries(test_finger_joints_service
-   ${catkin_LIBRARIES}
+   ${catkin_LIBRARIES} ${ROS_LIBRARIES}
 )
 
 #############

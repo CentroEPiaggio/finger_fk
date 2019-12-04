@@ -29,7 +29,7 @@
 #include <boost/thread.hpp>
 
 #define DEBUG	0
-#define HAND_NAME	"right_hand"
+#define HAND_NAME	"soft_hand"
 
 using namespace std;
 
